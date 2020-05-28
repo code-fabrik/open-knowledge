@@ -89,12 +89,19 @@ roads with the `fclass` attribute of `motorway`. The file
 
 ## Exporting
 
-Click the export button and use the following settings:
+In order to export the map SVG, you must first find the zoom level to
+export. Open the settings in the top right and zoom all the way out.
+Then start zooming in on the required area one level at a time. Make
+sure to wait until the map has loaded until you zoom further. This
+could take some time.
 
-* Set Zoom-Level to 13
-* Shift + Drag to create a new bounding box and adjust using the coordinates
-* A1 size is 594x841mm or 7016x9933px. Try to hit this size
-* Export the file
+Once you have reached your desired zoom level, you need to define the
+map extent. Modify the "Bounds" input box on the right to contain about
+0.1° x 0.1°, e.g. `8.2,46.5,8.3,46.6`. Modify the bounds until you are
+happy. Save the settings.
+
+Click the export button on the top right, and choose the format, size,
+zoom level and bounds of your export. Then export the file.
 
 ## Labelling
 
