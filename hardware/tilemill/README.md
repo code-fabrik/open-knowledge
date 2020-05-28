@@ -100,6 +100,8 @@ map extent. Modify the "Bounds" input box on the right to contain about
 0.1° x 0.1°, e.g. `8.2,46.5,8.3,46.6`. Modify the bounds until you are
 happy. Save the settings.
 
+![map settings view](images/map-settings.png)
+
 Click the export button on the top right, and choose the format, size,
 zoom level and bounds of your export. Then export the file.
 
