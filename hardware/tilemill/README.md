@@ -43,11 +43,15 @@ water areas, roads and buildings.
 * Select the Shapefile as the datasource and leave all other options as
   they are. Click "Save & Style".
 
+![add layer modal](images/add-layer.png)
+
 ## Styling layers
 
 The layer view should now display all the layers you imported. You can
 toggle their visibility, delete them or list all contained objects in
 the layer panel.
+
+![layer modal](images/list-layers.png)
 
 The different objects of a layer are usually tagged. The tags contain
 information about the road size, the maximum speed, the water depth and
@@ -55,6 +59,8 @@ much more. Those attributes can be used to style different types of
 objects of the same layer differently. To see all possible attributes
 and their values, hover the layer and open the "Features" view. The
 table lists all attributes, e.g. `fclass` for the road size.
+
+![layer features](images/layer-features.png)
 
 To style a layer, you can enter CartoCSS code in the right pane of
 TileMill. CartoCSS works like normal CSS, where you can target the
