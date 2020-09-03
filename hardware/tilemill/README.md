@@ -62,6 +62,33 @@ table lists all attributes, e.g. `fclass` for the road size.
 
 ![layer features](images/layer-features.png)
 
+If you do not know how a particular feature is tagged, the easiest way
+to find it is to open the map on [openstreetmap.org](https://openstreetmap.org),
+find the feature, right-click it and note the OSM-ID (the long number).
+
+With that knowledge, you can run the following command to find the
+feature in the .shp file, replacing OSMID with your ID:
+
+```bash
+ogrinfo -al gis_osm_roads_free_1.shp | grep OSMID -B 1 -A 10
+```
+This will list all attributes of this feature, so you know how to
+select it in CartoCSS:
+
+```
+OGRFeature(gis_osm_roads_free_1):1069046
+  osm_id (String) = 653190711
+  code (Integer) = 5153
+  fclass (String) = footway
+  name (String) = (null)
+  ref (String) = (null)
+  oneway (String) = B
+  maxspeed (Integer) = 0
+  layer (Integer64) = 0
+  bridge (String) = F
+  tunnel (String) = F
+```
+
 To style a layer, you can enter CartoCSS code in the right pane of
 TileMill. CartoCSS works like normal CSS, where you can target the
 attributes of features with the CSS attribute selector:
