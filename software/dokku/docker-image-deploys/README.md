@@ -10,3 +10,7 @@ an application for a Docker image deploy is documented in this category.
 You can find the following instructions:
 
 * [Umami](umami.md) (analytics)
+* [Drone](drone-server.md) (CI runner)
+* [Drone runner](drone-runner.md) (CI runner worker)
+
+If any problems occur, read the [troubleshooting](troubleshooting.md) guide.

@@ -25,7 +25,7 @@ It states the following:
 ## Set the env variables
 
 * `dokku config:set umami HASH_SALT=4ZdrPd7vWmgloyupUsgaHysUZoa0SE8ZNULKLFcz`
-* `dokku config:set DATABASE_TYPE=postgresql`
+* `dokku config:set umami DATABASE_TYPE=postgresql`
 
 ## Change port mapping
 
