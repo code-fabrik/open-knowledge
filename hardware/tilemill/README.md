@@ -62,6 +62,33 @@ table lists all attributes, e.g. `fclass` for the road size.
 
 ![layer features](images/layer-features.png)
 
+If you do not know how a particular feature is tagged, the easiest way
+to find it is to open the map on [openstreetmap.org](https://openstreetmap.org),
+find the feature, right-click it and note the OSM-ID (the long number).
+
+With that knowledge, you can run the following command to find the
+feature in the .shp file, replacing OSMID with your ID:
+
+```bash
+ogrinfo -al gis_osm_roads_free_1.shp | grep OSMID -B 1 -A 10
+```
+This will list all attributes of this feature, so you know how to
+select it in CartoCSS:
+
+```
+OGRFeature(gis_osm_roads_free_1):1069046
+  osm_id (String) = 653190711
+  code (Integer) = 5153
+  fclass (String) = footway
+  name (String) = (null)
+  ref (String) = (null)
+  oneway (String) = B
+  maxspeed (Integer) = 0
+  layer (Integer64) = 0
+  bridge (String) = F
+  tunnel (String) = F
+```
+
 To style a layer, you can enter CartoCSS code in the right pane of
 TileMill. CartoCSS works like normal CSS, where you can target the
 attributes of features with the CSS attribute selector:
@@ -96,18 +123,22 @@ sure to wait until the map has loaded until you zoom further. This
 could take some time.
 
 Once you have reached your desired zoom level, you need to define the
-map extent. Modify the "Bounds" input box on the right to contain about
-0.1° x 0.1°, e.g. `8.2,46.5,8.3,46.6`. Modify the bounds until you are
-happy. Save the settings.
+map extent. Shift-drag to set the map extent. Save the settings once
+you are happy.
 
 ![map settings view](images/map-settings.png)
 
 Click the export button on the top right, and choose the format, size,
-zoom level and bounds of your export. Then export the file.
+zoom level and bounds of your export. Make sure the size corresponds
+to the pixel size of your final poster (e.g. 7016 x 9933px for printing
+an A1 poster. Then export the file as SVG.
 
 ## Labelling
 
 The easiest way to add the location label is to open the resulting SVG
 file in [Inkscape](../inkscape/README.md) and copy an existing
 template. You can download a template of the
-[finished poster](images/bern_map.svg).
+[finished poster](images/bern_poster.svg). The original poster uses the
+"Equal Sans" font by [Måns Grebäck](https://www.mansgreback.com/) which
+is free for noncommercial use. You can [download](images/EqualSans_Demo.ttf)
+it from this repo.
