@@ -12,5 +12,6 @@ You can find the following instructions:
 * [Umami](umami.md) (analytics)
 * [Drone](drone-server.md) (CI runner)
 * [Drone runner](drone-runner.md) (CI runner worker)
+* [Sentry](sentry.md) (error reporter)
 
 If any problems occur, read the [troubleshooting](troubleshooting.md) guide.
