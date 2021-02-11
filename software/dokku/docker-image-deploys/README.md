@@ -14,5 +14,6 @@ You can find the following instructions:
 * [Drone runner](drone-runner.md) (CI runner worker)
 * [Sentry](sentry.md) (error reporter)
 * [InvoiceNinja](invoiceninja.md) (invoice generator)
+* [Renovate](renovate.md) (dependency monitor)
 
 If any problems occur, read the [troubleshooting](troubleshooting.md) guide.
