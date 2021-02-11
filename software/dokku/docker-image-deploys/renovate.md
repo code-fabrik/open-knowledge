@@ -29,3 +29,11 @@ It states the following:
 ## Deploy the image
 
 `dokku tags:deploy renovate latest`
+
+## Run at specific interval
+
+To run Renovate at a specific interval, add a cron task to the hosts crontab, for example every 10 minutes:
+
+```cron
+*/10 * * * * dokku dokku ps:restart renovate
+```
