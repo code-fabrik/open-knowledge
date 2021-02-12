@@ -17,3 +17,5 @@ You can find the following instructions:
 * [Renovate](renovate.md) (dependency monitor)
 
 If any problems occur, read the [troubleshooting](troubleshooting.md) guide.
+
+To update a docker image, refer to the [update docs](update.md).
