@@ -3,6 +3,7 @@
 ## Software
 
 * [Application deployment with Dokku](software/dokku/README.md)
+* [Embedded programming](software/embedded/README.md)
 
 ## Hardware
 
