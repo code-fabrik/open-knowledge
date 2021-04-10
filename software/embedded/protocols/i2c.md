@@ -45,6 +45,12 @@ high after SCL has gone high.
 * Write a data frame containing the register address (register selection)
 * Write one or more data frames containing the data to write
 
+## Terminology in datasheets
+
+* The device addressing + r/w frame is usually called `SAD+R` or `SAD+W`
+* The register addressing frame is usually called `SUB`
+* Data frames are usually called `DATA`
+
 ## Advantages
 
 * Low number of lines
