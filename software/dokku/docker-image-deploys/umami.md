@@ -36,6 +36,8 @@ It states the following:
 
 `dokku tags:deploy umami postgresql-latest`
 
+The default username is `admin` and the default password is `umami`.
+
 ## Troubleshooting
 
 * Debug proxy mapping: `dokku nginx:error-logs umami -t`
