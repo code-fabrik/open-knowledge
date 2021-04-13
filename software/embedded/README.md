@@ -8,3 +8,4 @@ devices.
 
 * [List of protocols](protocols/README.md)
 * [List of peripherials](peripherials/README.md)
+* [List of boards](boards/README.md)
