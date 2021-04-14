@@ -6,6 +6,7 @@ devices.
 
 ## Chapters
 
-* [List of protocols](protocols/README.md)
-* [List of peripherials](peripherials/README.md)
-* [List of boards](boards/README.md)
+* [List of protocols](protocols/README.md) such as UART or i2c
+* [List of peripherials](peripherials/README.md) such as IMUs or temperature sensors
+* [List of components](components/README.md) such as EEPROM or FRAM
+* [List of boards](boards/README.md) such as RAK7205
