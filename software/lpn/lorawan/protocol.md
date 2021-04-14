@@ -30,3 +30,9 @@ Between the *Node* and the *LNPN*, the MAC payload data is encrypted using the
 Between the *Node* and the *Application Server*, the application payload data
 is encrypted using the *AppSKey*. This ensures that application data can't be
 read by the *LPNP*.
+
+### Services
+
+* MCPS (MAC Common Part Sublayer): used for data transmission and reception
+* MLME (MAC Layer Management Entity): used for managing the LoRaWAN network
+* MIB (MAC Information Base): used for storing information and configuration
