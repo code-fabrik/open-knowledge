@@ -36,6 +36,38 @@ It states the following:
 
 `dokku tags:deploy umami postgresql-latest`
 
+## Create database tables
+* Expose your database to access it locally: `dokku postgres:expose umami-postgres`
+* Note the port on which postgres service has exposed the database 5432 -> *PORT* 
+
+Example message: `info -----> Service umami-postgres exposed on port(s) [container->host]: 5432->9750`
+
+* Get information about your database from the `DATABASE_URL`: `dokku postgres:info umami-postgres`
+
+Example message: `DSN: postgres://postgres:YOUR_DB_PASSWORD@dokku-postgres-umami-postgres:5432/umami_postgres`
+
+* Clone umami repo locally and install its dependencies:
+```
+git clone https://github.com/mikecao/umami.git
+cd umami
+npm install
+```
+
+`HOSTNAME` = Your-Dokku-Host-URL (Ex. domain.com or IP of your dokku server)
+
+`PORT` = The port you exposed the database on
+
+`YOUR_DB_PASSWORD` = the password you'll see in your `DATABASE_URL`
+
+* In umami repo that you cloned locally, construct and enter this command to create DB tables
+
+`PGPASSWORD=YOUR_DB_PASSWORD psql -h HOSTNAME -p PORT -U postgres -d umami_postgres -f sql/schema.postgresql.sql`
+
+The default username is `admin` and the default password is `umami`.
+
+* Log in and make sure that you have access to your dashboard
+* Unexpose your database: `dokku postgres:unexpose umami-postgres`
+
 ## Troubleshooting
 
 * Debug proxy mapping: `dokku nginx:error-logs umami -t`
