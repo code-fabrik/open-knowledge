@@ -19,6 +19,7 @@ It states the following:
 
 ## Create services
 
+* Install postgres plugin: `sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres`
 * Create a postgres service: `dokku postgres:create umami-postgres`
 * Link the service: `dokku postgres:link umami-postgres umami`
 
