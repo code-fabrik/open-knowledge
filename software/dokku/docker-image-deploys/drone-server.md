@@ -16,7 +16,6 @@ It states the following:
 
 * Create a dokku app: `dokku apps:create drone-server`
 * Pull the Docker image: `docker pull drone/drone:1.9.1`
-* Retag the Docker image to match the app: `docker tag drone/drone:1.9.1 dokku/drone-server:1.9.1`
 
 ## Set the env variables
 
@@ -42,4 +41,4 @@ HTTPS, resulting in an infinite loop.
 
 ## Deploy the image
 
-`dokku tags:deploy drone-server 1.9.1`
+Run `dokku git:from-image drone-server drone/drone:1.9.1`

@@ -20,7 +20,6 @@ It states the following:
 
 * Create a dokku app: `dokku apps:create renovate`
 * Pull the Docker image: `docker pull renovate/renovate:latest`
-* Retag the Docker image to match the app: `docker tag renovate/renovate:latest dokku/renovate:latest`
 
 ## Set the env variables
 
@@ -28,7 +27,7 @@ It states the following:
 
 ## Deploy the image
 
-`dokku tags:deploy renovate latest`
+Run `dokku git:from-image renovate renovate/renovate:latest`
 
 ## Run at specific interval
 

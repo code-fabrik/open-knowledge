@@ -4,7 +4,6 @@
 
 * Create a dokku app: `dokku apps:create invoiceninja`
 * Pull the Docker image: `docker pull codefabrikgmbh/invoiceninja:latest`
-* Retag the Docker image to match the app: `docker tag codefabrikgmbh/invoiceninja:latest dokku/invoiceninja:latest`
 
 Note: The original invoiceninja/latest image can be run on Dokku. It includes
 only php-fpm as the base image though. Because this image lacks a web server,
@@ -71,4 +70,4 @@ you can set to configure emails and other external services.
 
 ## Deploy
 
-`dokku tags:deploy invoiceninja latest`
+Run `dokku git:from-image invoiceninja codefabrikgmbh/invoiceninja:latest`

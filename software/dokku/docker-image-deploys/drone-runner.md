@@ -15,7 +15,6 @@ The instructions state that
 
 * Create a dokku app: `dokku apps:create drone-runner`
 * Pull the Docker image: `drone/drone-runner-docker:1.5.2`
-* Retag the Docker image to match the app: `docker tag drone/drone-runner-docker:1.5.2 dokku/drone-runner:1.5.2`
 
 ## Set the env variables
 
@@ -35,4 +34,4 @@ Set all the env variables mentioned in the [documentation])(https://docs.drone.i
 
 ## Deploy the image
 
-`dokku tags:deploy drone-runner 1.5.2`
+Run `dokku git:from-image drone-runner drone/drone-runner-docker:1.5.2`
