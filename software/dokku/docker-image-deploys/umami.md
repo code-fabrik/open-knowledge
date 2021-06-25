@@ -15,58 +15,42 @@ It states the following:
 
 * Create a dokku app: `dokku apps:create umami`
 * Pull the Docker image: `docker pull ghcr.io/mikecao/umami:postgresql-latest`
-* Retag the Docker image to match the app: `docker tag ghcr.io/mikecao/umami:postgresql-latest dokku/umami:postgresql-latest`
 
 ## Create services
 
 * Create a postgres service: `dokku postgres:create umami-postgres`
-* Link the service: `dokku postgres:link umami-postgres umami`
+* Link the database to the application: `dokku postgres:link umami-postgres umami`
 
 ## Set the env variables
 
 * `dokku config:set umami HASH_SALT=4ZdrPd7vWmgloyupUsgaHysUZoa0SE8ZNULKLFcz`
 * `dokku config:set umami DATABASE_TYPE=postgresql`
 
+Note: The environment variable `DATABASE_URL` must not be set manually since it was automatically set when linking the database to the application.
+
 ## Change port mapping
 
 * `dokku proxy:ports-remove umami http:80:5000`
 * `dokku proxy:ports-add umami http:80:3000`
 
+## Create database tables
+
+* Open the Umami [Github repository](https://github.com/mikecao/umami)
+* Copy the content of the file `sql/schema.postgresql.sql`
+* Open a connection to your dokku PostgreSQL instance: `dokku postgres:connect umami-postgres`
+* Paste the content of the file that you previously copied
+
 ## Deploy the image
 
-`dokku tags:deploy umami postgresql-latest`
-
-## Create database tables
-* Expose your database to access it locally: `dokku postgres:expose umami-postgres`
-* Note the port on which postgres service has exposed the database 5432 -> *PORT* 
-
-Example message: `info -----> Service umami-postgres exposed on port(s) [container->host]: 5432->9750`
-
-* Get information about your database from the `DATABASE_URL`: `dokku postgres:info umami-postgres`
-
-Example message: `DSN: postgres://postgres:YOUR_DB_PASSWORD@dokku-postgres-umami-postgres:5432/umami_postgres`
-
-* Clone umami repo locally and install its dependencies:
-```
-git clone https://github.com/mikecao/umami.git
-cd umami
-npm install
-```
-
-`HOSTNAME` = Your-Dokku-Host-URL (Ex. domain.com or IP of your dokku server)
-
-`PORT` = The port you exposed the database on
-
-`YOUR_DB_PASSWORD` = the password you'll see in your `DATABASE_URL`
-
-* In umami repo that you cloned locally, construct and enter this command to create DB tables
-
-`PGPASSWORD=YOUR_DB_PASSWORD psql -h HOSTNAME -p PORT -U postgres -d umami_postgres -f sql/schema.postgresql.sql`
+* Run `dokku git:from-image umami ghcr.io/mikecao/umami:postgresql-latest`
 
 The default username is `admin` and the default password is `umami`.
 
-* Log in and make sure that you have access to your dashboard
-* Unexpose your database: `dokku postgres:unexpose umami-postgres`
+## Updating
+
+* Pull the latest image: `docker pull ghcr.io/mikecao/umami:postgresql-latest`
+* Run `dokku git:from-image umami ghcr.io/mikecao/umami:postgresql-latest`
+* Rebuild the application: `dokku ps:rebuild umami`
 
 ## Troubleshooting
 
