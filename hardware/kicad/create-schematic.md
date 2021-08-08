@@ -22,7 +22,9 @@ As in all other parts of the program, you can also use M (move component), R (ro
 
 Connect all components with wires.
 
-Once you have completed the schematic, add values (i.e. labes) to the components (such as resistor value or capacitor capacity) by hovering the component and pressing V (add value). Move the values to some place where they do not interfere with your work.
+Once you have completed the schematic, add **values** (i.e. labes) to the components (such as resistor value or capacitor capacity) by hovering the component and pressing V (add value). Move the values to some place where they do not interfere with your work.
+
+You may also change the component **reference** (e.g. C1, C2, R1). Hover over the component and press U to set the reference.
 
 Some common components:
 
