@@ -14,6 +14,9 @@
 ### Instructions
 
 MOVS: Copy string from source to destination, e.g. 
+
 STRB: Store byte from register in memory, e.g. STRB &lt;Rt&gt;, [&lt;Rn&gt;, &lt;Rm&gt;] with Rt=source register, Rn=base register, Rm=offset
+
 LDR: Load register with const or address, e.g. LDR register,=[expression | label-expression]
+
 B: Branch to label
