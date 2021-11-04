@@ -27,7 +27,9 @@ It states the following:
 * `dokku config:set umami HASH_SALT=4ZdrPd7vWmgloyupUsgaHysUZoa0SE8ZNULKLFcz`
 * `dokku config:set umami DATABASE_TYPE=postgresql`
 
-Note: The environment variable `DATABASE_URL` must not be set manually since it was automatically set when linking the database to the application.
+Notes:
+- The environment variable `DATABASE_URL` must not be set manually since it was automatically set when linking the database to the application.
+- Create a random value for `HASH_SALT`, e.g. with `openssl rand -hex 32`
 
 ## Change port mapping
 
@@ -40,6 +42,10 @@ Note: The environment variable `DATABASE_URL` must not be set manually since it 
 * Copy the content of the file `sql/schema.postgresql.sql`
 * Open a connection to your dokku PostgreSQL instance: `dokku postgres:connect umami-postgres`
 * Paste the content of the file that you previously copied
+
+## Add domain name (optional)
+
+* Run `dokku domains:add umami sub.domain.com`
 
 ## Deploy the image
 
