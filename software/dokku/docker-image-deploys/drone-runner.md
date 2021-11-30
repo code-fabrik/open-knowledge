@@ -35,3 +35,14 @@ Set all the env variables mentioned in the [documentation])(https://docs.drone.i
 ## Deploy the image
 
 Run `dokku git:from-image drone-runner drone/drone-runner-docker:1.5.2`
+
+
+## Update
+To update to a specific version (e.g. `1.8.0` or `latest`) lookup the tags on [https://hub.docker.com/r/drone/drone-runner-docker/tags](https://hub.docker.com/r/drone/drone-runner-docker/tags) and run on your dokku server:
+
+```sh
+docker pull drone/drone-runner-docker:1.8.0
+dokku git:from-image drone-runner drone/drone-runner-docker:1.8.0
+```
+
+The application will be rebuilt automatically.
