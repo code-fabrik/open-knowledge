@@ -42,3 +42,13 @@ HTTPS, resulting in an infinite loop.
 ## Deploy the image
 
 Run `dokku git:from-image drone-server drone/drone:1.9.1`
+
+## Update
+To update to a specific version (e.g. `2.5.0` or `latest`) lookup the tags on [https://hub.docker.com/r/drone/drone/tags](https://hub.docker.com/r/drone/drone/tags) and run on your dokku server:
+
+```sh
+docker pull drone/drone:2.5.0
+dokku git:from-image drone-server drone/drone:2.5.0
+```
+
+The application will be rebuilt automatically.
