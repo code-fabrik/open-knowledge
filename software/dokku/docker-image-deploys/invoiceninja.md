@@ -71,3 +71,7 @@ you can set to configure emails and other external services.
 ## Deploy
 
 Run `dokku git:from-image invoiceninja codefabrikgmbh/invoiceninja:latest`
+
+## Migrate database
+
+Run bash inside the container (i.e. with lazydocker) and run the following command: `php artisan migrate`
