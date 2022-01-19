@@ -23,6 +23,7 @@ Set all the env variables mentioned in the [documentation])(https://docs.drone.i
 
 * `dokku config:set drone-server DRONE_BITBUCKET_CLIENT_ID=1234`
 * `dokku config:set drone-server DRONE_BITBUCKET_CLIENT_SECRET=abcdef`
+* `dokku config:set drone-server DRONE_USER_CREATE=username:<bitbucket-username>,admin:true` (replace `<bitbucket-username>` with your actual username)
 ...
 
 Careful!
