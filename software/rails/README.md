@@ -6,6 +6,7 @@
 * Create the database: `rails db:create`
 * Run the migrations: `rails db:migrate`
 * Store sample data: `rails db:seed`
+* Start the server: `rails server`
 
 ## Rest
 
