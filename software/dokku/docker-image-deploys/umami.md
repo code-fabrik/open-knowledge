@@ -5,7 +5,7 @@ To get started with Umami, read the
 
 It states the following:
 
-* Umami has a Docker image at ghcr.io/mikecao/umami:postgresql-latest
+* Umami has a Docker image at docker.umami.dev/umami-software/umami:postgresql-latest
 * It listens on port 3000
 * It depends on PostgreSQL
 * It reads the PostgreSQL config from DATABASE_URL
@@ -14,7 +14,7 @@ It states the following:
 ## Preparing dokku and the image
 
 * Create a dokku app: `dokku apps:create umami`
-* Pull the Docker image: `docker pull ghcr.io/mikecao/umami:postgresql-latest`
+* Pull the Docker image: `docker pull docker.umami.dev/umami-software/umami:postgresql-latest`
 
 ## Create services
 
@@ -49,14 +49,14 @@ Notes:
 
 ## Deploy the image
 
-* Run `dokku git:from-image umami ghcr.io/mikecao/umami:postgresql-latest`
+* Run `dokku git:from-image umami docker.umami.dev/umami-software/umami:postgresql-latest`
 
 The default username is `admin` and the default password is `umami`.
 
 ## Updating
 
-* Pull the latest image: `docker pull ghcr.io/mikecao/umami:postgresql-latest`
-* Run `dokku git:from-image umami ghcr.io/mikecao/umami:postgresql-latest`
+* Pull the latest image: `docker pull docker.umami.dev/umami-software/umami:postgresql-latest`
+* Run `dokku git:from-image umami docker.umami.dev/umami-software/umami:postgresql-latest`
 * Rebuild the application: `dokku ps:rebuild umami`
 
 ## Troubleshooting
