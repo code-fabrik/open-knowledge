@@ -5,7 +5,7 @@
 * [Application deployment with Dokku](software/dokku/README.md)
 * [Embedded programming](software/embedded/README.md)
 * [Low Power Networks](software/lpn/README.md)
-* [Rails](software/rails/README.md)
+* [Rails Web development](software/rails/README.md)
 
 ## Hardware
 
