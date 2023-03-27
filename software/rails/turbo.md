@@ -2,13 +2,13 @@
 
 ## Turbo Drive
 
-Turbo Drive is mostly what Turbolinks was earlier. Link clicks and form submissions are automatically intercepted, and instead of a full page load, Turbo loads the target using `fetch` and replaces the `<body>` element. This prevents the browser from needing to reparse CSS and JS resources.
+Turbo Drive is mostly what Turbolinks was earlier. Link clicks and form submissions are automatically intercepted, and **instead of a full page load, Turbo loads the target using `fetch` and replaces the `<body>` element**. This prevents the browser from needing to reparse CSS and JS resources.
 
 To disable Drive for a single element (a link or a form), annotate it with `data-turbo="false"`.
 
 ## Turbo Frames
 
-Turbo Frames allows developers to replace only parts of a page when the user clicks a link or submits a form. This can be used to show an inline form in a list of editable items.
+Turbo Frames allows developers to **replace only parts of a page when the user clicks a link or submits a form**. This can be used to show an inline form in a list of editable items.
 
 To use turbo frames, use the `turbo_frame_tag` helper and pass the ActiveRecord entity to the helper:
 
@@ -39,7 +39,7 @@ Editing an item of the list will inject the form into the list. Saving the form 
 
 ## Turbo Streams
 
-Streams are used to live update pages over a websocket connection.
+Streams are used to **live update pages over a websocket** connection.
 
 To subscribe to a particular stream on the frontend, use the turbo_stream_from tag.
 
