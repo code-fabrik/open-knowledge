@@ -22,7 +22,7 @@ To use turbo frames, use the `turbo_frame_tag` helper and pass the ActiveRecord 
 <% end %>
 ```
 
-All navigations that lead to a page containing the same tag will automatically injected into the existing frame.
+All navigations that lead to a page containing the same tag will automatically be injected into the existing frame. Note however, that Rails still renders the entire template, and the frontend JS extracts the tag and inserts it into the appropriate place. This might have performance implications if the page is particularly expensive to generate.
 
 `todos/edit.html.erb`
 
@@ -37,23 +37,22 @@ All navigations that lead to a page containing the same tag will automatically i
 
 Editing an item of the list will inject the form into the list. Saving the form will replace the form with the updated list item.
 
+⚠ The target page must always include the `turbo_frame_tag`, otherwise an error message ("Content missing") will be displayed.
+
 ## Turbo Streams
 
-Streams are used to **live update pages over a websocket** connection.
+Streams are used to **replace parts of a website after a user action**. In addition to the `Frames` above, they can be used to
 
-To subscribe to a particular stream on the frontend, use the turbo_stream_from tag.
+* replace other parts of the website as well, not only the part where the user action occured (e.g. to add a new list item when the user submitted a form)
+* broadcast those changes to other users via WebSockets
 
-`todos/index.html.erb`
+Contrary to the `Frames`, `Streams` only render the part to replace, and not the whole page. This can make rendering a lot faster, if the part of the website to update is small and the whole page is large.
 
-```erb
-<%= turbo_stream_from current_user, "todos" %>
-```
+To deliver an update from the backend, you can choose how the update should be treated on the frontend. You can either append or prepend a new item to a container, you can replace an existing item (losing all event handlers of the item), update the content of an existing item (keeping the handlers of the item), remove an item, or add an item before or after a specific other item.
 
-It is important to scope the stream to the owning entity. Without the `current_user` above, all updates to any of the todos would be sent to all users.
+### Local updates
 
-To deliver a live update from the backend, you can choose how the update should be treated on the frontend. You can either append or prepend a new item to a container, you can replace an existing item (losing all event handlers), update the content of an existing item (keeping the handlers), remove an item, or add an item before or after a specific other item.
-
-Delivering updates can either be done as a response to a controller action:
+To update a part of a website in response to a user action, add a `turbo_stream` format handler to the controller action:
 
 `todos_controller.rb`
 
@@ -78,15 +77,46 @@ def destroy
 end
 ```
 
-Or in a model:
+For the create action, this automatically renders `todos/todo` with the `todo` local variable and appends it to the element with id "todos". Note that the following calls are equivalent, but `partial`  and `locals` can be customized:
+
+* `turbo_stream.append(:todos, partial: "todos/todo", locals: { todo: todo })`
+* `turbo_stream.append(:todos, todo)`
+
+For the delete action, this automatically removes the element with the `dom_id(todo)`. Instead of a model (on which `to_key()` is called), it's also possible to pass a specific DOM id.
+
+It is also possible to apply multiple updates by passing an array like `[turbo_stream.remove(todo), turbo_stream.update(notification)]`
+
+### Broadcasts
+
+To broadcast changes, visitors must subscribe to a specific channel in order to get the updates. This allows developers to scope the updates to specific ropics or specific (authorized) users.
+
+To subscribe to a stream on the frontend, use the `turbo_stream_from` tag and pass an identifier.
+
+`todos/index.html.erb`
+
+```erb
+<%= turbo_stream_from "todos" %>
+```
+
+Any user subscribing to the same stream will get all updates to this stream.
+
+It is also possible to scope a stream more narrowly, by passing multiple identifiers:
+
+```erb
+<%= turbo_stream_from current_user, "todos" %>
+```
+
+The stream name is derived from all arguments to the `turbo_stream_from` call. That means that messages are now scoped to the user.
+
+To deliver updates to all users, a callback must be added to the model:
 
 ```ruby
 class Todo < ApplicationRecord
-  broadcasts_to ->(todo) { [todo.user, "todos"] }, inserts_by: :prepend
+  broadcasts_to ->(todo) { [todo.user, "todos"] }
 end
 ```
 
-Using `broadcasts_to ->(todo) { [todo.user, "todos"] }` automatically defines a default behaviour for updating the UI when a new record is created, updated or destroyed. The defaults are as follows and can be overriden:
+This instructs Rails to broadcast all updates to the users subscribed to the channel `{user}, "todos"`. The call to `broadcasts_to` automatically defines a default behaviour for updating the UI when a new record is created (calling `append`), updated (calling `replace`) or destroyed (calling `remove`). The defaults are as follows and can be overriden:
 
 | Property | Default | Overridable by |
 |---|---|---|
@@ -97,7 +127,7 @@ Using `broadcasts_to ->(todo) { [todo.user, "todos"] }` automatically defines a 
 
 ## Custom actions
 
-Updates can also be delivered to a custom container and as a custom callback:
+Updates can also be delivered at any other time in the lifecycle and by applying a custom action:
 
 ```ruby
 class Todo < ApplicationRecord
@@ -111,4 +141,4 @@ class Todo < ApplicationRecord
 end
 ```
 
-TODO: what's the payload? Same as above, automatically?
+The payload is the partial derived from the model name (`todos/todo`) and will be prepended to the DOM element which has the plural name of the model as the ID (`todos`).
