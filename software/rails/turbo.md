@@ -88,7 +88,7 @@ It is also possible to apply multiple updates by passing an array like `[turbo_s
 
 ### Broadcasts
 
-To broadcast changes, visitors must subscribe to a specific channel in order to get the updates. This allows developers to scope the updates to specific ropics or specific (authorized) users.
+To broadcast changes, visitors must subscribe to a specific channel in order to get the updates. This allows developers to scope the updates to specific topics or specific (authorized) users.
 
 To subscribe to a stream on the frontend, use the `turbo_stream_from` tag and pass an identifier.
 
@@ -108,7 +108,7 @@ It is also possible to scope a stream more narrowly, by passing multiple identif
 
 The stream name is derived from all arguments to the `turbo_stream_from` call. That means that messages are now scoped to the user.
 
-To deliver updates to all users, a callback must be added to the model:
+Updates can be either sent as a result of a model change:
 
 ```ruby
 class Todo < ApplicationRecord
@@ -116,7 +116,17 @@ class Todo < ApplicationRecord
 end
 ```
 
-This instructs Rails to broadcast all updates to the users subscribed to the channel `{user}, "todos"`. The call to `broadcasts_to` automatically defines a default behaviour for updating the UI when a new record is created (calling `append`), updated (calling `replace`) or destroyed (calling `remove`). The defaults are as follows and can be overriden:
+or in a controller, by custom code:
+
+```ruby
+def create
+  ...
+  @todo.broadcast_append_later_to(current_user, "todos")
+  ...
+end
+```
+
+This instructs Rails to broadcast all updates to the users subscribed to the channel `{user}, "todos"`. The model call to `broadcasts_to` automatically defines a default behaviour for updating the UI when a new record is created (calling `append`), updated (calling `replace`) or destroyed (calling `remove`). For the controller broadcasts, the action must be specified in the broadcast call. The defaults are as follows and can be overriden:
 
 | Property | Default | Overridable by |
 |---|---|---|
@@ -125,9 +135,9 @@ This instructs Rails to broadcast all updates to the users subscribed to the cha
 | Generated partial | `todos/_todo` (model default partial) | `partial: "todos/simple_todo"` |
 | Stream name | `[todo.user, "todos"]` | - |
 
-## Custom actions
+## Custom model actions
 
-Updates can also be delivered at any other time in the lifecycle and by applying a custom action:
+Model updates can also be delivered at any other time in the lifecycle and by applying a custom action:
 
 ```ruby
 class Todo < ApplicationRecord
